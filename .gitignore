@@ -1,0 +1,4 @@
+/server/plugins
+/server/home
+/client/config
+!.gitkeep

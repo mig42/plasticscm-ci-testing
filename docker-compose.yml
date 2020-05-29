@@ -1,0 +1,27 @@
+version: "3.8"
+
+services:
+  bamboo-server:
+    build:
+      context: ./server
+    image: bamboo-server-plasticscm:latest
+    hostname: bamboo-server
+    volumes:
+      - ./server/home:/var/atlassian/application-data/bamboo
+      - ./client/config:/home/bamboo/.plastic4
+      - ./server/plugins:/home/bamboo/plugins
+    expose:
+      - 8085
+      - 54663
+    init: true
+    ports:
+      - "8085:8085"
+
+  bamboo-agent:
+    build:
+      context: ./agent
+    image: bamboo-agent-plasticscm:latest
+    command: ["http://bamboo-server:8085"]
+    volumes:
+      - ./client/config:/home/bamboo/.plastic4
+    init: true
