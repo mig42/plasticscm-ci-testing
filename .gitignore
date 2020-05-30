@@ -1,4 +1,10 @@
 /bamboo/server/plugins
 /bamboo/server/home
 /bamboo/client/config
+/jenkins/server/home
+/jenkins/slave/client-config
+/jenkins/slave/secret.txt
+
+!/jenkins/slave/client-config/remoting.conf
+!/jenkins/server/home/.plastic4/remoting.conf
 !.gitkeep

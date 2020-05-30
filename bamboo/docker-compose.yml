@@ -20,6 +20,8 @@ services:
   bamboo-agent:
     build:
       context: ./agent
+    depends_on:
+      - "bamboo-server"
     image: bamboo-agent-plasticscm:latest
     command: ["http://bamboo-server:8085"]
     volumes:

@@ -1,0 +1,36 @@
+version: "3.8"
+
+services:
+  jenkins-server:
+    build:
+      context: ./server
+    image: jenkins-server-plasticscm:latest
+    environment:
+      JAVA_OPTS: "-Djava.awt.headless=true"
+    hostname: jenkins-server
+    volumes:
+      - ./server/home:/var/jenkins_home
+    expose:
+      - 8080
+      - 50000
+    init: true
+    ports:
+      - "8080:8080"
+
+  jenkins-agent:
+    build:
+      context: ./slave
+    depends_on:
+      - "jenkins-server"
+    image: jenkins-agent-plasticscm:latest
+    command: [ "-url", "http://jenkins-server:8080", "@/run/secrets/agent-secret", "single-agent" ]
+    volumes:
+      - ./slave/client-config:/home/jenkins/.plastic4
+    init: true
+    secrets:
+      - agent-secret
+
+secrets:
+  agent-secret:
+    file: ./slave/secret.txt
+
