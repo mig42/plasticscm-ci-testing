@@ -18,4 +18,7 @@ RUN chmod +x /plugins-entrypoint.sh
 
 USER ${BAMBOO_USER}
 
+RUN cp /opt/plasticscm5/client/bamboo_plugin/bamboo-plasticscm-plugin-*.jar \
+       ${BAMBOO_INSTALL_DIR}/atlassian-bamboo/WEB-INF/lib
+
 ENTRYPOINT [ "/plugins-entrypoint.sh" ]
