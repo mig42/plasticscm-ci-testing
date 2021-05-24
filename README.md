@@ -58,4 +58,18 @@ Jenkins data (logs, build results, artifacts, etc.) will appear there, so you
 can start up any new container -even with newer images- at any moment.
 Everything will be still there.
 
+Remember to write someting in `jenkins/slave/secret.txt`. At first you won't
+know what should go there, just ensure the file exists. You need to wait until
+the server is set up, and then go to *Manage Jenkins > Manage Nodes and Clouds*.
+
+Register there a new node. Be sure to name it as defined in
+`jenkins/docker-compose.yml`! Once registered, the node page will show you the
+secret token you need to write in `jenkins/slave/secret.txt`.
+
 When you're all set up, run `docker-compose up` in the `jenkins` directory.
+
+### Points of improvement
+
+1. The Jenkins slave needs to be registered manually
+2. The Jenkins slave needs to wait until the Jenkins server is able to receive
+   connections
