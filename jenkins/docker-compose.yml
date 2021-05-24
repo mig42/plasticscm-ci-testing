@@ -6,7 +6,7 @@ services:
       context: ./server
     image: jenkins-server-plasticscm:latest
     environment:
-      JAVA_OPTS: "-Djava.awt.headless=true"
+      JAVA_OPTS: "-Djava.awt.headless=true -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=18889"
     hostname: jenkins-server
     volumes:
       - ./server/home:/var/jenkins_home
@@ -16,6 +16,8 @@ services:
     init: true
     ports:
       - "8080:8080"
+      - "50000:50000"
+      - "18889:18889"
 
   jenkins-agent:
     build:
