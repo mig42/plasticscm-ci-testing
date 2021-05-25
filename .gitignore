@@ -4,6 +4,11 @@
 /jenkins/server/home
 /jenkins/slave/client-config
 /jenkins/slave/secret.txt
+/teamcity/server/data
+/teamcity/server/logs
+/teamcity/server/plastic-config
+/teamcity/agent/config
+/teamcity/agent/plastic-config
 
 !/jenkins/slave/client-config/remoting.conf
 !/jenkins/server/home/.plastic4/remoting.conf
