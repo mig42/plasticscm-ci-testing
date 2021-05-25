@@ -1,0 +1,40 @@
+version: "3.8"
+
+services:
+  teamcity-server:
+    build:
+      context: ./server
+    image: teamcity-server-plasticscm:latest
+    environment:
+      JAVA_OPTS: "-Djava.awt.headless=true -agentlib:jdwp=transport=dt_socket,server=y,suspend=n,address=20000"
+    hostname: jenkins-server
+    volumes:
+      - ./server/data:/data/teamcity_server/datadir
+      - ./server/plastic-config:/opt/teamcity/.plastic4
+      - ./server/logs:/opt/teamcity/logs
+    expose:
+      - 8111
+    init: true
+    ports:
+      - "8111:8111"
+      - "20000:20000"
+
+  teamcity-agent:
+    build:
+      context: ./agent
+    depends_on:
+      - "teamcity-server"
+    image: teamcity-agent-plasticscm:latest
+    command: [
+      "-wait",
+      "tcp://teamcity-server:8111",
+      "-timeout",
+      "120s",
+      "/run-services.sh"
+    ]
+    environment:
+      SERVER_URL: "http://teamcity-server:8111/"
+    volumes:
+      - ./agent/config:/data/teamcity_agent/conf
+      - ./agent/plastic-config:/home/buildagent/.plastic4
+    init: true
