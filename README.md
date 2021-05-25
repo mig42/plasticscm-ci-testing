@@ -68,6 +68,24 @@ secret token you need to write in `jenkins/slave/secret.txt`.
 
 When you're all set up, run `docker-compose up` in the `jenkins` directory.
 
+## TeamCity
+
+This environment provisions one TeamCity server and one TeamCity agent, both with `cm` installed.
+The HTTP server will listen in port `8111`.
+
+Ensure you provide a valid `client.conf` for both containers. Place the server configuration in
+`teamcity/server/plastic-config` and the agent configuration in `teamcity/agent/plastic-config`.
+
+Keep in mind that you need to use the appropriate server name or IP in both `client.conf` files.
+You can use `host.docker.internal` if your Plastic SCM server is running in the Docker host.
+
+You'll need to manually install the Plastic SCM plugin using the TeamCity UI.
+
+The server will save information in `teamcity/server/data`. Its logs will appear in
+`teamcity/server/logs`.
+
+When you're all set up, run `docker compose up` in the `teamcity` directory.
+
 ### Points of improvement
 
 1. The Jenkins slave needs to be registered manually
