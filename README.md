@@ -68,6 +68,13 @@ secret token you need to write in `jenkins/slave/secret.txt`.
 
 When you're all set up, run `docker-compose up` in the `jenkins` directory.
 
+### Points of improvement
+
+1. The Jenkins slave needs to be registered manually
+2. The Jenkins slave needs to wait until the Jenkins server is able to register agents
+    1. Right now it waits until the server accepts connections, but then the server returns
+       503 status codes
+
 ## TeamCity
 
 This environment provisions one TeamCity server and one TeamCity agent, both with `cm` installed.
@@ -85,9 +92,3 @@ The server will save information in `teamcity/server/data`. Its logs will appear
 `teamcity/server/logs`.
 
 When you're all set up, run `docker compose up` in the `teamcity` directory.
-
-### Points of improvement
-
-1. The Jenkins slave needs to be registered manually
-2. The Jenkins slave needs to wait until the Jenkins server is able to receive
-   connections
