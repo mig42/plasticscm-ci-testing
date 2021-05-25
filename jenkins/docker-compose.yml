@@ -25,7 +25,17 @@ services:
     depends_on:
       - "jenkins-server"
     image: jenkins-agent-plasticscm:latest
-    command: [ "-url", "http://jenkins-server:8080", "@/run/secrets/agent-secret", "single-agent" ]
+    command: [
+      "-wait",
+      "tcp://jenkins-server:8080",
+      "-timeout",
+      "120s",
+      "jenkins-agent",
+      "-url",
+      "http://jenkins-server:8080",
+      "@/run/secrets/agent-secret",
+      "single-agent"
+    ]
     volumes:
       - ./slave/client-config:/home/jenkins/.plastic4
     init: true
