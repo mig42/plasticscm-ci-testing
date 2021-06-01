@@ -8,6 +8,7 @@
 /teamcity/server/logs
 /teamcity/server/plastic-config
 /teamcity/agent/config
+/teamcity/agent/logs
 /teamcity/agent/plastic-config
 
 !/jenkins/slave/client-config/remoting.conf
