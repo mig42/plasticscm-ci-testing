@@ -8,6 +8,7 @@ RUN echo "deb https://www.plasticscm.com/plasticrepo/stable/ubuntu/ ./" | \
     curl https://www.plasticscm.com/plasticrepo/stable/ubuntu/Release.key -L | \
     apt-key add -
 RUN apt-get update && apt-get install -y plasticscm-client-core
+RUN ln -s /opt/teamcity/.plastic4/cm.log.conf /opt/plasticscm5/client/cm.log.conf
 
 VOLUME [ "/home/tcuser/.plastic4" ]
 

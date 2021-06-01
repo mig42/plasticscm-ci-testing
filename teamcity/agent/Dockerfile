@@ -14,6 +14,8 @@ RUN curl -OL https://github.com/jwilder/dockerize/releases/download/$DOCKERIZE_V
     && tar -C /usr/local/bin -xzvf dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz \
     && rm dockerize-linux-amd64-$DOCKERIZE_VERSION.tar.gz
 
+RUN ln -s /home/buildagent/.plastic4/cm.log.conf /opt/plasticscm5/client/cm.log.conf
+
 VOLUME [ "/home/buildagent/.plastic4" ]
 
 ENTRYPOINT [ "dockerize" ]

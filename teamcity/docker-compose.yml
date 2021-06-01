@@ -37,4 +37,5 @@ services:
     volumes:
       - ./agent/config:/data/teamcity_agent/conf
       - ./agent/plastic-config:/home/buildagent/.plastic4
+      - ./agent/logs:/opt/buildagent/logs
     init: true
